@@ -227,8 +227,10 @@ housing
 *
 **/
 .card-detail {
-  margin: 0 auto;
   max-width: 1240px;
+  min-height: 75vh;
+  margin: 30px auto;
+  padding: 0 20px;
 }
 .carousel {
   position: relative;
@@ -242,6 +244,7 @@ housing
 .arrow {
   color: #000;
   cursor: pointer;
+  height: 80px;
 }
 .arrow-left {
   position: absolute;
@@ -252,6 +255,94 @@ housing
   position: absolute;
   right: 10px;
   top: 40%;
+}
+.text-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.host {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.host-text {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.host-text h3 {
+  color: #ff6060;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+.host-text img {
+  border-radius: 50%;
+  width: 64px;
+}
+.rating {
+  margin-top: 20px;
+}
+.fa-star {
+  font-size: 20px;
+  color: #ff6060;
+  margin-left: 15px;
+}
+.star-empty {
+  color: #e3e3e3;
+}
+.housing-texts h1 {
+  font-size: 36px;
+  color: #ff6060;
+  font-weight: 500;
+}
+.housing-texts h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.housing-texts ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.housing-texts li {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 10px;
+  background: #ff6060;
+  color: #fff;
+  padding: 5px 25px;
+  white-space: nowrap;
+}
+.housing-dropdown {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.dropdown {
+  max-width: 552px;
+  width: 100%;
+}
+.dropdown h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff6060;
+  padding: 10px 20px 10px 15px;
+  border-radius: 5px;
+  color: #fff;
+}
+.dropdown-text {
+  background-color: #f6f6f673;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
 }
 /**
 *
@@ -353,5 +444,35 @@ Media queries
   .about-background img {
     height: 111px;
     border-radius: 10px;
+  }
+  .carousel-img {
+    height: 255px;
+    border-radius: 10px;
+  }
+  .arrow {
+    height: 30px;
+  }
+  .host {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .host img {
+    width: 60px;
+  }
+  .host h3 {
+    font-size: 12px;
+    text-align: right;
+  }
+  .fa-star {
+    font-size: 15px;
+  }
+  .housing-dropdown {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dropdown h3 {
+    height: 40px;
   }
 }

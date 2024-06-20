@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import arrowRight from "../assets/images/arrowRight.svg";
 import arrowLeft from "../assets/images/arrowLeft.svg";
-import starFilled from "../assets/images/star-filled.svg";
-import starEmpty from "../assets/images/star-empty.svg";
 import arrowUp from "../assets/images/arrowUp.svg";
 import arrowDown from "../assets/images/arrowDown.svg";
 
@@ -43,12 +41,12 @@ export default function Logement() {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
-        <img
+        <i
           key={i}
-          src={i <= rating ? starFilled : starEmpty}
-          alt={i <= rating ? "filled star" : "empty star"}
-          className="star"
-        />
+          className={
+            i <= rating ? "fa-solid fa-star" : "fa-solid fa-star star-empty"
+          }
+        ></i>
       );
     }
     return stars;
@@ -81,59 +79,59 @@ export default function Logement() {
           ></img>
         )}
       </div>
-      <div>
-        <h1>{data.title}</h1>
-        <p>
-          {data.location}
+      <div className="text-content">
+        <div className="housing-texts">
+          <h1>{data.title}</h1>
+          <h2>{data.location}</h2>
           <ul>
             {data.tags.map((tag, index) => (
               <li key={index}>{tag}</li>
             ))}
           </ul>
-        </p>
+        </div>
+        <div className="host">
+          <div className="host-text">
+            <h3>{data.host.name}</h3>
+            <img src={data.host.picture} alt={data.host.name} />
+          </div>
+          <div className="rating">{renderStars(data.rating)}</div>
+        </div>
       </div>
-      <div className="host">
-        <h3>{data.host.name}</h3>
-        <img src={data.host.picture} alt={data.host.name} />
-        <div className="rating">{renderStars(data.rating)}</div>
-      </div>
-      <div>
-        <h3
-          onClick={() => setIsEquipmentsOpen(!isEquipmentsOpen)}
-          style={{ cursor: "pointer" }}
-        >
-          Equipments{" "}
-          <img
-            src={isEquipmentsOpen ? arrowUp : arrowDown}
-            alt={
-              isEquipmentsOpen ? "Flèche vers le haut" : "Flèche vers le bas"
-            }
-            className="about-arrow"
-          />
-        </h3>
-        {isEquipmentsOpen && (
-          <ul>
-            {data.equipments.map((equipment, index) => (
-              <li key={index}>{equipment}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div>
-        <h3
-          onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-          style={{ cursor: "pointer" }}
-        >
-          Description
-          <img
-            src={isDescriptionOpen ? arrowUp : arrowDown}
-            alt={
-              isDescriptionOpen ? "Flèche vers le haut" : "Flèche vers le bas"
-            }
-            className="about-arrow"
-          />
-        </h3>
-        {isDescriptionOpen && <p>{data.description}</p>}
+      <div className="housing-dropdown">
+        <div className="equipment dropdown">
+          <h3 onClick={() => setIsEquipmentsOpen(!isEquipmentsOpen)}>
+            Equipments
+            <img
+              src={isEquipmentsOpen ? arrowUp : arrowDown}
+              alt={
+                isEquipmentsOpen ? "Flèche vers le haut" : "Flèche vers le bas"
+              }
+              className="about-arrow"
+            />
+          </h3>
+          {isEquipmentsOpen && (
+            <ul className="dropdown-text">
+              {data.equipments.map((equipment, index) => (
+                <li key={index}>{equipment}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="description dropdown">
+          <h3 onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
+            Description
+            <img
+              src={isDescriptionOpen ? arrowUp : arrowDown}
+              alt={
+                isDescriptionOpen ? "Flèche vers le haut" : "Flèche vers le bas"
+              }
+              className="about-arrow"
+            />
+          </h3>
+          {isDescriptionOpen && (
+            <p className="dropdown-text">{data.description}</p>
+          )}
+        </div>
       </div>
     </section>
   );
