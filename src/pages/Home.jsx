@@ -18,7 +18,7 @@ export default function HomePage() {
         <h1 className="title">Chez vous, partout et ailleurs</h1>
       </div>
       <div className="container-cards">
-        {location.slice(0, 6).map((item) => (
+        {location.map((item) => (
           <Card
             key={item.id}
             id={item.id}
