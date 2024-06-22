@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import arrowRight from "../assets/images/arrowRight.svg";
-import arrowLeft from "../assets/images/arrowLeft.svg";
-import arrowUp from "../assets/images/arrowUp.svg";
-import arrowDown from "../assets/images/arrowDown.svg";
+import { Tags } from "../component/Tags";
+import { Dropdown } from "../component/Dropdown";
+import { Carrousel } from "../component/Carrousel";
 
 export default function Logement() {
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const [isEquipmentsOpen, setIsEquipmentsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,17 +21,6 @@ export default function Logement() {
         }
       });
   }, [id, navigate]);
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === data.pictures.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? data.pictures.length - 1 : prevIndex - 1
-    );
-  };
 
   const renderStars = (rating) => {
     const stars = [];
@@ -58,36 +43,12 @@ export default function Logement() {
 
   return (
     <section className="card-detail">
-      <div className="carousel">
-        {data.pictures.length > 1 && (
-          <img
-            className="arrow arrow-left"
-            src={arrowLeft}
-            onClick={handlePrevImage}
-          ></img>
-        )}
-        <img
-          className="carousel-img"
-          src={data.pictures[currentImageIndex]}
-          alt={`${data.title} ${currentImageIndex + 1}`}
-        />
-        {data.pictures.length > 1 && (
-          <img
-            className="arrow arrow-right"
-            src={arrowRight}
-            onClick={handleNextImage}
-          ></img>
-        )}
-      </div>
+      <Carrousel pictures={data.pictures} title={data.title} />
       <div className="text-content">
         <div className="housing-texts">
           <h1>{data.title}</h1>
           <h2>{data.location}</h2>
-          <ul>
-            {data.tags.map((tag, index) => (
-              <li key={index}>{tag}</li>
-            ))}
-          </ul>
+          <Tags tags={data.tags} />
         </div>
         <div className="host">
           <div className="host-text">
@@ -97,40 +58,18 @@ export default function Logement() {
           <div className="rating">{renderStars(data.rating)}</div>
         </div>
       </div>
-      <div className="housing-dropdown">
-        <div className="equipment dropdown">
-          <h3 onClick={() => setIsEquipmentsOpen(!isEquipmentsOpen)}>
-            Equipments
-            <img
-              src={isEquipmentsOpen ? arrowUp : arrowDown}
-              alt={
-                isEquipmentsOpen ? "Flèche vers le haut" : "Flèche vers le bas"
-              }
-              className="about-arrow"
-            />
-          </h3>
-          {isEquipmentsOpen && (
-            <ul className="dropdown-text">
-              {data.equipments.map((equipment, index) => (
-                <li key={index}>{equipment}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <div className="description dropdown">
-          <h3 onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
-            Description
-            <img
-              src={isDescriptionOpen ? arrowUp : arrowDown}
-              alt={
-                isDescriptionOpen ? "Flèche vers le haut" : "Flèche vers le bas"
-              }
-              className="about-arrow"
-            />
-          </h3>
-          {isDescriptionOpen && (
-            <p className="dropdown-text">{data.description}</p>
-          )}
+      <div className="dropdown">
+        <Dropdown title="Equipments" className="housing-dropdown">
+          <ul>
+            {data.equipments.map((equipment, index) => (
+              <li key={index}>{equipment}</li>
+            ))}
+          </ul>
+        </Dropdown>
+        <div className=" housing-dropdown">
+          <Dropdown title="Description">
+            <p>{data.description}</p>
+          </Dropdown>
         </div>
       </div>
     </section>
