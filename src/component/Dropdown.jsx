@@ -11,7 +11,7 @@ export function Dropdown({ title, children, className = "" }) {
   return (
     <div
       ref={dropdownRef}
-      className={`dropdowns ${isOpen ? "open" : "closed"} ${className}`}
+      className={`dropdowns ${isOpen ? "open" : ""} ${className}`}
     >
       <h3 onClick={toggleDropdown}>
         {title}
