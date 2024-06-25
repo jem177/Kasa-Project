@@ -1,6 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import arrowUp from "../assets/images/arrowUp.svg";
-import arrowDown from "../assets/images/arrowDown.svg";
+import { useState, useRef } from "react";
 
 export function Dropdown({ title, children, className = "" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,11 +15,7 @@ export function Dropdown({ title, children, className = "" }) {
     >
       <h3 onClick={toggleDropdown}>
         {title}
-        <img
-          src={isOpen ? arrowUp : arrowDown}
-          alt={isOpen ? "Flèche vers le haut" : "Flèche vers le bas"}
-          className="dropdown-arrow"
-        />
+        <i class="fa-solid fa-chevron-up"></i>
       </h3>
       {isOpen && (
         <div className={`dropdown-text ${isOpen ? "open" : ""}`}>

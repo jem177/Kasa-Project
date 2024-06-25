@@ -145,11 +145,11 @@ Home Page
 .container-cards {
   display: flex;
   flex-flow: wrap;
-  justify-content: space-around;
+  justify-content: center;
   background-color: #f6f6f6;
   border-radius: 25px;
   padding: 15px 0;
-  row-gap: 30px;
+  row-gap: 10px;
   margin: 40px 20px 0;
 }
 .home-card {
@@ -350,11 +350,35 @@ housing
   color: #fff;
 }
 .dropdown-text {
+  width: 100%;
   background-color: #f6f6f673;
   margin: 0 auto;
   padding: 20px;
   border-radius: 0 0 5px 5px;
+  font-size: 18px;
+  line-height: 142.6%;
 }
+.fa-chevron-up {
+  font-size: 25px;
+  transition: 0.3s;
+}
+.dropdowns.open .fa-chevron-up {
+  transform: rotate(-180deg);
+}
+.dropdown-text.open {
+  animation: dropdown 0.3s;
+}
+@keyframes dropdown {
+  from {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /**
 *
 Error Page
